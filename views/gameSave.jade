@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  form(action="",method="POST")
+    div
+        span.label Game URL
+        input(type="text", name="gameUrl", value="https://www.backstabbr.com/game/SL---G001/5666851202531328")
+    div
+        input(type="submit", value="Save")
