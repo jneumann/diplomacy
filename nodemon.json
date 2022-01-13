@@ -5,5 +5,7 @@
     ],
     "watch": [
       "**/*"
-    ]
+    ],
+    "ext": "js, css",
+    "legacyWatch": true
   }
