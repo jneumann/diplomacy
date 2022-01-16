@@ -12,13 +12,16 @@ router.get('/game-save', function(req, res, next) {
 })
 
 router.post('/game-save', async function (req, res, next) {
+  const db = await require('../utilities/db')();
+
   let gameObj = {
     url: req.body.gameUrl,
     gameTime: new Date(),
     players: await game.OMGScore(req.body.gameUrl)
   }
 
-  console.log(gameObj);
+  db.collection('scores')
+    .insertOne(gameObj);
 
   res.render('gameSave');
 });
