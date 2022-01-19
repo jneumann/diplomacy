@@ -19,6 +19,33 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(async function (req, res, next) {
+  let seasonMenu = async () => {
+    function parseISOString(s) {
+      var b = s.split(/\D+/);
+      return new Date(Date.UTC(b[0], --b[1], b[2], b[3], b[4], b[5], b[6]));
+    }
+
+    const season = require('./utilities/season')
+
+    let menu = await season.getAll();
+
+    menu.forEach(m => {
+      m.start = m.start.split('T')[0]
+      m.end = m.end.split('T')[0]
+    })
+  
+    return menu
+  }
+  
+  seasonMenu().then(s => {
+    app.locals.seasonMenu = s
+
+    next()
+  })
+})
+
+
 // TODO Implement authentication
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

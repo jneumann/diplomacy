@@ -4,12 +4,29 @@ obj.updateCards = function (scores) {
 
 };
 
-obj.getCards = async () => {
+obj.getCards = async (start, end) => {
   const db = await require('./db')()
 
   let cards = {};
   
-  await db.collection('scores').find({}).forEach(s => {
+  if (start === undefined) {
+    start = new Date('2000-01-01');
+  } else {
+    start = new Date(start)
+  }
+
+  if (end === undefined) {
+    end = new Date('3000-01-01')
+  } else {
+    end = new Date(end)
+  }
+
+  await db.collection('scores').find({
+    gameTime: {
+      $gte: start,
+      $lte: end
+    }
+  }).forEach(s => {
     s.players.forEach(p => {
       if (p.waive) {
         return;

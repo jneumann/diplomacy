@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1 Season List
+  form(action="",method="POST")
+    div
+        label Season Name
+        input(type="text", name="name", placeholder="Jan - Feb 2022")
+    div
+        label Start Date 
+        input(type="date", name="start")
+    div 
+        label End Date 
+        input(type="date", name="end")
+    div
+        input(type="submit", value="Add Season")
+
+  table 
+    tr 
+        th Season Name
+        th Start Date 
+        th End Date

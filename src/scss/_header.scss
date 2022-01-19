@@ -4,5 +4,21 @@ nav {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        padding: 1rem;
+
+        li {
+            &:hover {
+                > ul {
+                    display: block;
+                }
+            }
+
+            > ul {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                display: none;
+            }
+        }
     }
 }

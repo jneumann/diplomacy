@@ -9,7 +9,15 @@ nav ul {
   list-style-type: none;
   display: flex;
   flex-direction: row;
-  justify-content: space-around; }
+  justify-content: space-around;
+  padding: 1rem; }
+  nav ul li:hover > ul {
+    display: block; }
+  nav ul li > ul {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    display: none; }
 
 table {
   border-spacing: 0; }

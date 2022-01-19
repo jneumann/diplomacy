@@ -10,4 +10,10 @@ html
           a(href='/game-save') Add game
         li
           a(href='/cards') Cards
+          ul 
+            each s in seasonMenu 
+              li
+                a(href='/cards?start=' + s.start + '&end=' + s.end)= s.name
+        li 
+          a(href='/season') Seasons
     block content
