@@ -1,6 +1,7 @@
 const axios = require('axios'),
-    cheerio = require('cheerio')
-    
+    cheerio = require('cheerio'),
+    ObjectID = require("mongodb").ObjectID;
+const { ObjectId } = require('mongodb');
 
 let object = [];
 
@@ -253,12 +254,39 @@ object.getAll = async (start, end) => {
   }
 
   const db = await require('./db')();
-  return await db.collection('scores').find({
-    gameTime: {
-      $gte: start,
-      $lte: end
+  return await db.collection('scores').aggregate([
+    {
+      $match: {
+        gameTime: {
+          $gte: start,
+          $lte: end
+        }
+      }
+    },
+    { $sort: {gameTime: 1} }
+  ]).toArray();
+}
+
+object.getOne = async (id) => {
+  const db = await require('./db')();
+  var g = await db.collection('scores').findOne({_id: ObjectId(id)}); 
+
+  g.gameTime = new Date(g.gameTime).toISOString().split('T')[0];
+
+  return g
+}
+
+object.saveOne = async (body) => {
+  const db = await require('./db')()
+  await db.collection('scores').updateOne(
+    {_id: ObjectId(body._id)},
+    {
+      $set: {
+        url: body.url,
+        gameTime: new Date(body.gameTime)
+      }
     }
-  }).toArray();
+  )
 }
 
 module.exports = object;

@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  h1 Games
+  form(method="POST") 
+    input(type="hidden", name="_id" value=game._id)
+    div 
+        label URL
+        input(name="url", value=game.url)
+    div 
+        label Game Date
+        input(type="date", name="gameTime", value=game.gameTime)
+    div 
+        input(type="submit", value="Save Game")

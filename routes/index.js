@@ -63,4 +63,17 @@ router.get('/games', async (req, res, next) => {
   res.render('game/index', {games: games})
 })
 
+router.get('/games/:id', async (req, res, next) => {
+  let g = await game.getOne(req.params.id);
+
+  res.render('game/edit', {game: g});
+});
+
+router.post('/games/:id', async(req, res, next) => {
+  await game.saveOne(req.body)
+  let g = await game.getOne(req.params.id);
+
+  res.render('game/edit', {game: g});
+})
+
 module.exports = router;
