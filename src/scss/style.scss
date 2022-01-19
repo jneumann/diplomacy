@@ -1,0 +1,25 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #000;
+}
+
+@import "_header";
+
+table {
+    border-spacing: 0;
+    tr {
+        &:nth-child(2n) {
+            background-color: #eee;
+        }
+
+        th,
+        td {
+            padding: 0.25rem 0.5rem;
+            border-bottom: 1px solid #ccc;
+        }
+    }
+}

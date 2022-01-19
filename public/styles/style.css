@@ -1,0 +1,21 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #000; }
+
+nav ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; }
+
+table {
+  border-spacing: 0; }
+  table tr:nth-child(2n) {
+    background-color: #eee; }
+  table tr th,
+  table tr td {
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid #ccc; }
