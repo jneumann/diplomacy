@@ -1,7 +1,6 @@
 const axios = require('axios'),
     cheerio = require('cheerio')
-
-const SOLO_SCORE = 120
+    
 
 let object = [];
 
@@ -58,6 +57,8 @@ object.byUrl = function(backstabberUrl) {
 }
 
 object.OMGScore = async function(url) {
+  const SOLO_SCORE = 120
+
   let score = await this.byUrl(url);
   let solo = false;
       
@@ -217,6 +218,25 @@ object.OMGScore = async function(url) {
   }
 
   return score;
+}
+
+object.saveBackstabbr = async function (backstabberUrl) {
+  let self = this;
+
+  let scores = await self.OMGScore(backstabberUrl)
+  let players = [];
+
+  scores.forEach(s => {
+    players.push(s.player)
+  });
+
+  let gameObj = {
+    url: backstabberUrl,
+    gameTime: new Date(),
+    players: scores
+  }
+  const db = await require('./db')()
+  db.collection('scores').insertOne(gameObj);
 }
 
 module.exports = object;

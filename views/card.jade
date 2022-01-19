@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 Current Season Cards
+  table
+    tr
+      th Player 
+      th Austria
+      th England
+      th France 
+      th Germany 
+      th Italy 
+      th Russia 
+      th Turkey 
+      th Total Score
+      th
+    each card in cards 
+      tr 
+        td= card.player 
+        td= card.Austria 
+        td= card.England 
+        td= card.France 
+        td= card.Germany 
+        td= card.Italy 
+        td= card.Russia 
+        td= card.Turkey 
+        td= card.total
+        td X
