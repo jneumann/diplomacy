@@ -11,8 +11,8 @@ obj.getAll = async () => {
 obj.add = async (body) => {
     const db = await require('./db')()
 
-    body.start = new Date(body.start).toISOString();
-    body.end = new Date(body.end).toISOString();
+    body.start = new Date(body.start)
+    body.end = new Date(body.end)
 
     db.collection('seasons').insertOne(body);
 }

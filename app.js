@@ -31,8 +31,8 @@ app.use(async function (req, res, next) {
     let menu = await season.getAll();
 
     menu.forEach(m => {
-      m.start = m.start.split('T')[0]
-      m.end = m.end.split('T')[0]
+      m.start = new Date(m.start).toISOString().split('T')[0]
+      m.end = new Date(m.end).toISOString().split('T')[0]
     })
   
     return menu

@@ -1,3 +1,5 @@
+const res = require('express/lib/response');
+
 const express = require('express'),
       router = express.Router(),
       game = require('../utilities/game'),
@@ -19,11 +21,6 @@ router.post('/game-save', async function (req, res, next) {
   res.render('gameSave');
 });
 
-router.get('/games', (req, res, next) => {
-  // TODO game editing and display
-  throw "Not Implemented"
-})
-
 router.get('/cards', async (req, res, next) => {
   let playerCards = await card.getCards(req.query.start, req.query.end);
 
@@ -31,13 +28,39 @@ router.get('/cards', async (req, res, next) => {
 });
 
 router.get('/season', async (req, res, next) => {
-  res.render('season');
+  const season = require('../utilities/season')
+
+  let seasons = await season.getAll();
+
+  seasons.forEach(m => {
+    m.start = new Date(m.start).toISOString().split('T')[0]
+    m.end = new Date(m.end).toISOString().split('T')[0]
+  })
+
+  res.render('season', {seasons: seasons});
 })
 
 router.post('/season', async (req, res, next) => {
-  season.add(req.body);
+  await season.add(req.body);
 
-  res.render('season');
+  let seasons = await season.getAll();
+
+  seasons.forEach(m => {
+    m.start = new Date(m.start).toISOString().split('T')[0]
+    m.end = new Date(m.end).toISOString().split('T')[0]
+  })
+
+  res.render('season', {seasons: seasons});
+})
+
+router.get('/games', async (req, res, next) => {
+  let games = await game.getAll(req.query.start, req.query.end)
+
+  games.forEach(m => {
+    m.gameTime = new Date(m.gameTime).toISOString().split('T')[0]
+  })
+
+  res.render('game/index', {games: games})
 })
 
 module.exports = router;

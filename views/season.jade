@@ -20,3 +20,8 @@ block content
         th Season Name
         th Start Date 
         th End Date
+    each s in seasons 
+        tr 
+            td= s.name
+            td= s.start 
+            td= s.end

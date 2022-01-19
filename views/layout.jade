@@ -9,6 +9,12 @@ html
         li
           a(href='/game-save') Add game
         li
+          a(href="#") Games
+          ul
+            each s in seasonMenu 
+              li
+                a(href='/games?start=' + s.start + '&end=' + s.end)= s.name
+        li
           a(href='/cards') Cards
           ul 
             each s in seasonMenu 

@@ -239,4 +239,26 @@ object.saveBackstabbr = async function (backstabberUrl) {
   db.collection('scores').insertOne(gameObj);
 }
 
+object.getAll = async (start, end) => {
+  if (start === undefined) {
+    start = new Date('1990-01-01');
+  } else {
+    start = new Date(start)
+  }
+
+  if (end === undefined) {
+    end = new Date('3000-01-01')
+  } else {
+    end = new Date(end)
+  }
+
+  const db = await require('./db')();
+  return await db.collection('scores').find({
+    gameTime: {
+      $gte: start,
+      $lte: end
+    }
+  }).toArray();
+}
+
 module.exports = object;

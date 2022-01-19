@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  h1 Games
+  table
+    tr
+        th Game #
+        th Game URL 
+        th Game Date 
+        th
+    - gameIndex = 1
+    each g in games
+        tr 
+            td= gameIndex
+            td= g.url
+            td= g.gameTime
+            td
+                a(href="") EDIT
+        - gameIndex += 1

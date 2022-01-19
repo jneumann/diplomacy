@@ -17,7 +17,8 @@ nav ul {
     display: flex;
     flex-direction: column;
     position: absolute;
-    display: none; }
+    display: none;
+    padding: 1rem 1rem 1rem 0; }
 
 table {
   border-spacing: 0; }
